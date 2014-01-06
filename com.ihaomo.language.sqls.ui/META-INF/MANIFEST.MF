@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: com.ihaomo.language.sqls.ui
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: com.ihaomo.language.sqls.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: com.ihaomo.language.sqls;visibility:=reexport,
+ org.eclipse.xtext.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.ui,
+ org.eclipse.xtext.builder,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.compare
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.xbase.lib
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: com.ihaomo.language.ui.quickfix,
+ com.ihaomo.language.ui.contentassist,
+ com.ihaomo.language.ui.contentassist.antlr,
+ com.ihaomo.language.ui.internal
+Bundle-Activator: com.ihaomo.language.ui.internal.SqlsActivator

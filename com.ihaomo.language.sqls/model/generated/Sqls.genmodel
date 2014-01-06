@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.ihaomo.language.sqls/src-gen" editDirectory="/com.ihaomo.language.sqls.edit/src"
+    editorDirectory="/com.ihaomo.language.sqls.editor/src" modelPluginID="com.ihaomo.language.sqls"
+    forceOverwrite="true" modelName="Sqls" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="com.ihaomo.language.sqls.edit"
+    editorPluginID="com.ihaomo.language.sqls.editor" runtimeVersion="2.9" usedGenPackages="../../../com.ihaomo.language.functions/model/generated/Functions.genmodel#//functions ../../../com.ihaomo.language.types/model/generated/Types.genmodel#//types">
+  <genPackages prefix="Sqls" basePackage="com.ihaomo.language" disposableProviderFactory="true"
+      fileExtensions="sqls" ecorePackage="Sqls.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Sqls.ecore#//TriggerTime">
+      <genEnumLiterals ecoreEnumLiteral="Sqls.ecore#//TriggerTime/BEFORE"/>
+      <genEnumLiterals ecoreEnumLiteral="Sqls.ecore#//TriggerTime/AFTER"/>
+    </genEnums>
+    <genClasses ecoreClass="Sqls.ecore#//SqlLibrary">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlLibrary/imports"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//SqlLibrary/database"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//SqlLibrary/version"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlLibrary/tags"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlLibrary/enums"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlLibrary/types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlLibrary/tables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlLibrary/triggers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlLibrary/methods"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//Tag">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//Tag/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//EnumElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//EnumElement/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//EnumElement/text"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//SqlType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlType/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlType/params"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//Table">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//Table/tags"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//Table/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Table/fields"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Table/constraints"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//Column">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//Column/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Column/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//Column/null"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//Column/primaryKey"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Column/defaultValue"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//TableConstraint"/>
+    <genClasses ecoreClass="Sqls.ecore#//UniqueTableConstraint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//UniqueTableConstraint/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//UniqueTableConstraint/columns"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//SqlMethod">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlMethod/tags"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlMethod/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//SqlMethod/array"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//SqlMethod/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlMethod/sql"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//OrderingTerm">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//OrderingTerm/expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//OrderingTerm/asc"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//OrderingTerm/desc"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//ResultColumn">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//ResultColumn/expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//ResultColumn/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//SelectList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//SelectList/resultColumns"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//Select">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//Select/all"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Select/selectList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Select/from"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Select/where"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Select/orderingTerms"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Select/limit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Select/limitOffset"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//TableRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//TableRef/table"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//TableRef/alias"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//SqlExpr"/>
+    <genClasses ecoreClass="Sqls.ecore#//SqlFunction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlFunction/function"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlFunction/params"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//SqlSentence"/>
+    <genClasses ecoreClass="Sqls.ecore#//Insert">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//Insert/table"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//InsertStatement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//InsertStatement/table"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//InsertStatement/columns"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//InsertStatement/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//Delete">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//Delete/table"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Delete/where"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//Update">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//Update/table"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Update/updateColumnExpressions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Update/where"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//UpdateColumnExpression">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//UpdateColumnExpression/column"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//UpdateColumnExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//Get">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//Get/table"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//TriggerAction"/>
+    <genClasses ecoreClass="Sqls.ecore#//Trigger">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//Trigger/tags"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//Trigger/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//Trigger/time"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Trigger/action"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//Trigger/table"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Trigger/sqls"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//Enum">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//Enum/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//TypeDef">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//TypeDef/sqlType"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//SqlBinaryExpr">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlBinaryExpr/left"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//SqlBinaryExpr/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlBinaryExpr/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//SqlPlaceholder"/>
+    <genClasses ecoreClass="Sqls.ecore#//NewColumn">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//NewColumn/column"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//OldColumn">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//OldColumn/column"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//SqlNested">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlNested/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//ColumnRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//ColumnRef/tableRef"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//ColumnRef/column"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//SqlParam">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//SqlParam/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//SqlStringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//SqlStringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//SqlNumberLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Sqls.ecore#//SqlNumberLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//SqlMethodRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//SqlMethodRef/method"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//DeleteTable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//DeleteTable/table"/>
+    </genClasses>
+    <genClasses ecoreClass="Sqls.ecore#//TriggerInsert"/>
+    <genClasses ecoreClass="Sqls.ecore#//TriggerDelete"/>
+    <genClasses ecoreClass="Sqls.ecore#//TriggerUpdate">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Sqls.ecore#//TriggerUpdate/columns"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

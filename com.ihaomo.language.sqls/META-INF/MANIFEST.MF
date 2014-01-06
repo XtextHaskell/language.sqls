@@ -1,0 +1,36 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: com.ihaomo.language.sqls
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: com.ihaomo.language.sqls; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ com.ihaomo.language.types;bundle-version="1.0.0",
+ com.ihaomo.language.functions;bundle-version="1.0.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.xbase.lib
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: com.ihaomo.language,
+ com.ihaomo.language.services,
+ com.ihaomo.language.sqls,
+ com.ihaomo.language.sqls.impl,
+ com.ihaomo.language.sqls.util,
+ com.ihaomo.language.serializer,
+ com.ihaomo.language.parser.antlr,
+ com.ihaomo.language.parser.antlr.internal,
+ com.ihaomo.language.validation,
+ com.ihaomo.language.scoping,
+ com.ihaomo.language.generator,
+ com.ihaomo.language.formatting

@@ -1,0 +1,220 @@
+grammar com.ihaomo.language.Sqls with org.eclipse.xtext.common.Terminals
+
+generate sqls "http://www.ihaomo.com/language/Sqls"
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "http://www.ihaomo.com/language/Types"
+import "http://www.ihaomo.com/language/Functions"
+
+SqlLibrary:
+	(imports+=Import)* // allow imports
+	'database' database=ID 'version=' version=INT
+	(
+		tags += Tag
+		| enums+=Enum 
+		| types+=TypeDef 
+		| tables+=Table 
+		| triggers+=Trigger 
+		| methods+=SqlMethod
+	)*;
+
+Import : 
+  'import' importURI=STRING; // feature must be named importURI	
+  	
+Tag :
+	'tag' name=ID
+;	
+
+Enum returns Type:
+	{Enum} 'enum' name=ID '{' (elements+=EnumElement)* '}'
+;
+
+EnumElement:
+	name = ID (text=STRING)?
+;
+
+SqlType:
+	type=[Type] ('(' params+=SqlLiteral (',' params+=SqlLiteral)*')')?
+;
+
+TypeDef returns Type:
+	{TypeDef} 'typedef' sqlType=SqlType name=ID
+;
+
+Table:
+	('[' tags+=[Tag] (',' tags+=[Tag])*']')? 'table' name=ID '{' fields+=Column+ constraints+=TableConstraint*'}' ;
+
+Column:
+	name=ID (type=SqlType) null?='NULL'? primaryKey?=PrimaryKey? ','?
+	(('default' | 'DEFAULT') defaultValue=SqlLiteral)?
+;
+
+TableConstraint:
+	UniqueTableConstraint 
+;
+
+UniqueTableConstraint: 
+	('constraint' name=ID)? 'unique' '(' columns+=[Column] (',' columns+=[Column])* ')' // conflictClause=ConflictClause
+;
+
+PrimaryKey:
+	'PRIMARY' 'KEY' | 'primary' 'key'
+;
+
+SqlMethod:
+	('[' tags+=[Tag] (',' tags+=[Tag])*']')? (type=[Table](array?='[]'?))? name=ID '{' sql+=SqlSentence* '}'
+;
+
+OrderingTerm:
+	expression=SqlExpr (asc?='ASC'|desc?='DESC')?
+;
+
+ResultColumn :
+	{ResultColumn}
+	expression=SqlExpr ('as' name=ID)?
+;
+
+SelectList:
+	resultColumns+=ResultColumn (',' resultColumns+=ResultColumn)*
+;
+
+Select:
+	'select' (all?='*' | selectList = SelectList)
+	'from' from=TableRef
+	('where' where=SqlExpr)?
+	('order' 'by' orderingTerms+=OrderingTerm (',' orderingTerms+=OrderingTerm)*)?
+	('limit' limit=SqlExpr ( ('offset'|',') limitOffset=SqlExpr)?)?
+;
+
+TableRef:
+	table=[Table] ('as' alias=ID)?
+;
+
+SqlExpr returns SqlExpr :
+	SqlConcat
+;
+
+SqlConcat returns SqlExpr:
+	SqlOrExpr (=>({SqlBinaryExpr.left=current} op='||') right=SqlOrExpr)*
+;
+
+SqlOrExpr returns SqlExpr :
+	SqlAndExpr (=>({SqlBinaryExpr.left=current} op='or') right=SqlAndExpr)*
+;
+
+SqlAndExpr returns SqlExpr:
+	SqlRelationalExpr (=>({SqlBinaryExpr.left=current} op='and') right=SqlRelationalExpr)*
+;
+
+SqlRelationalExpr returns SqlExpr:
+	SqlPrimaryExpr (=>({SqlBinaryExpr.left=current} op=('=' | '>' | '<' | '>=' | '<=' | 'like')) right=SqlPrimaryExpr)*
+;
+
+SqlPrimaryExpr returns SqlExpr:
+	{SqlPlaceholder} '?' |
+	{NewColumn} 'new.' column=[Column] |
+	{OldColumn} 'old.' column=[Column] |
+//	{SqlEnumRef} enumClass=[Enum] '.' value=[EnumElement] |
+	ColumnRef |
+	SqlParam  |
+	SqlLiteral |
+	SqlFunction |
+	{SqlNested} '(' expression=SqlExpr ')'
+;
+
+SqlFunction:
+	function=[Function] '(' (params+=SqlExpr (',' params +=SqlExpr)*)? ')'
+//	{FDatetime} 'datetime' '(' (params+=SqlExpr (',' params +=SqlExpr)*)? ')' |
+//	{FHex}      'hex' '(' param=SqlExpr ')' |
+//	{FLower}    'lower' '(' param=SqlExpr ')' |
+//	{FUpper}    'upper' '(' param=SqlExpr ')' |
+//	{FTrim}     'trim' '(' params+=SqlExpr (',' params +=SqlExpr)* ')' |
+//	{FLTrim}     'ltrim' '(' params+=SqlExpr (',' params +=SqlExpr)* ')' |
+//	{FRTrim}     'rtrim' '(' params+=SqlExpr (',' params +=SqlExpr)* ')' |
+//	{FAbs}      'abs' '(' param=SqlExpr ')' |
+//	{FMax}     'max' '(' params+=SqlExpr (',' params +=SqlExpr)* ')' |
+//	{FMin}     'min' '(' params+=SqlExpr (',' params +=SqlExpr)* ')' |
+//	{FRandomblob} 'randomblob' '(' param=SqlExpr ')' |
+//
+//	{FChanges} 'changes' '('  ')' |
+//	{FLastInsertRowID} 'last_insert_rowid' '('  ')' 
+;
+
+ColumnRef returns SqlExpr:
+	{ColumnRef} (tableRef=[TableRef] '.')? column=[Column]
+;
+
+
+SqlParam returns SqlExpr:
+	{SqlParam} '#' name=ID
+;
+
+SqlLiteral returns SqlExpr:
+	{SqlStringLiteral} value=STRING |
+	{SqlNumberLiteral} value=SignedNumber
+;
+
+SqlSentence:
+	Select | Insert | InsertStatement | Delete | Update | Get |
+	{SqlMethodRef} method=[SqlMethod] |
+	{DeleteTable} 'delete' table=[Table]
+;
+
+Insert:
+	'insert' table=[Table]
+;
+
+InsertStatement:
+	'insert' 'into' table=[Table]
+	'(' columns+=[Column] (',' columns+=[Column])* ')'
+	'values' '(' expressions+=SqlExpr (',' expressions+=SqlExpr)* ')'
+;
+
+Delete:
+	'delete' 'from' table=[Table] 'where' where=SqlExpr
+;
+
+Update:
+	'update' table=[Table]
+	('set' updateColumnExpressions+=UpdateColumnExpression 
+		(',' updateColumnExpressions+=UpdateColumnExpression)*
+		('where' where=SqlExpr)?
+	)?
+;
+
+UpdateColumnExpression:
+	column=[Column] '=' expression=SqlExpr
+;
+
+Get :
+	'get' table=[Table]
+;
+
+enum TriggerTime :
+	BEFORE='before' | AFTER='after'
+;
+
+TriggerAction :
+	{TriggerInsert} 'insert' |
+	{TriggerDelete} 'delete' |
+	{TriggerUpdate} 'update' 'of' columns+=[Column] (',' columns+=[Column])*
+;
+
+Trigger :
+	('[' tags+=[Tag] (',' tags+=[Tag])*']')? 'trigger' name=ID time=TriggerTime action=TriggerAction 'on' table=[Table] 
+	'{' sqls+=SqlSentence* '}'
+;
+
+SignedNumber returns ecore::EInt:
+	'-'?INT
+;
+
+/*
+ * Extended, keyword insensitive ID. Using the EID allows to use a known keyword as an ID.
+ */
+EID:
+	'insert' | 'update' | 'delete' | 'select'
+	| ID
+
+;
+terminal SL_COMMENT 	: '--' !('\n'|'\r')* ('\r'? '\n')?;
